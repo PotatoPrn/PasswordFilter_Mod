@@ -1,0 +1,6 @@
+/PassFiltLib/cmake-build-debug/
+/PassFiltLib/cmake-build-release/
+/Loader/cmake-build-release/
+/bin/
+/.idea/*.exe
+/.idea/*.dll
