@@ -4,3 +4,4 @@
 /bin/*.exe
 /bin/*.dll
 /.idea
+/Loader/cmake-build-debug/
