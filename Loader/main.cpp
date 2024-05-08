@@ -35,12 +35,14 @@ int main(int argc, char* argv[])
 
 	// Get Username
 	char Username[UNLEN+1];
+	RtlZeroMemory(Username, UNLEN+1);
 	DWORD UsernameLen[UNLEN+1];
 	GetUserName(Username, UsernameLen);
 
 	// Get Account/Computer Name
 	char ComputerName[UNLEN+1];
 	DWORD ComputerNameLen[UNLEN+1];
+	RtlZeroMemory(ComputerName, UNLEN + 1);
 	GetComputerName(ComputerName, ComputerNameLen);
 
 	_FilterPassword FilterPassword =
