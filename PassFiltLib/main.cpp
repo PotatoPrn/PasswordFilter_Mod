@@ -4,12 +4,9 @@
 
 #include <stdio.h>
 
-// zxcvbn-c
-#include "zxcvbn.h"
-
 // Utils
 #include "Utils.h"
-
+#include <zxcvbn/zxcvbn.h>
 
 #define LIBRARY_API __declspec(dllexport)
 
@@ -23,134 +20,44 @@ BOOLEAN PasswordFilter(PUNICODE_STRING PuniAccountName, PUNICODE_STRING PuniFull
 {
 	BOOLEAN Status = FALSE;
 
+	// Just for you, you know who .-.
 	if (SetOperation != 0)
-	{
-		Status = FALSE;
-	}
-	else
-	{
-		// If Using Dict :/
-		if (!ZxcvbnInit("zxcvbn.dict"))
-		{
-			printf("Error Loading Dict File");
-			return FALSE;
-		}
+		return Status;
 
 
-		// Convert to Narrow String
-		char* Password = PuniToChar(PuniPassword);
-		char* Fullname = PuniToChar(PuniFullname);
-		char* AccountName = PuniToChar(PuniAccountName);
-
-		const char* UserDict[] =
-		{
-			Fullname, AccountName,
-			0
-		};
-
-		// Test User Dict
-
-		// Perform Check
-		auto CarryCheck = [&]() -> BOOLEAN
-		{
-			// Using zxcvbn test for testing, unsure of capabilities
-			// Variables
-			ZxcMatch_t *Info, *p;
-			double Entropy;
-			double m = 0.0;
-			int PasswordLen, CheckLen;
-
-			Entropy = ZxcvbnMatch(Password, UserDict, &Info);
+	// If Using Dict :/
 
 
-			for (p = Info; p; p = p->Next)
-				m += p->Entrpy;
+	// Convert to Narrow String
+	char* Password = PuniToChar(PuniPassword);
+	char* Fullname = PuniToChar(PuniFullname);
+	char* AccountName = PuniToChar(PuniAccountName);
 
-			PasswordLen = strlen(Password);
+	// Test User Dict
+	// MMMM outdated non documented libraries make me want to kill my self : ^)
+	int bruh = 0;
+	const char* UserInput[] = {Fullname, AccountName, 0};
+	zxcvbn_guesses_t yep = 0.0;
+	bruh = zxcvbn_password_strength(Password, UserInput, &yep, 0);
+	printf("%d\n", bruh);
 
-			m = Entropy - m;
 
-			printf("Password %s \nLength %d\nEntropy bits=%.3f log10=%.3f\nMulti-word extra bits=%.1f\n",
-				Password, PasswordLen, Entropy, Entropy * 0.301029996, m);
+	// Perform Check
 
-			p = Info;
-			CheckLen = 0;
+	// Cleanup
 
-			while (p)
-			{
-				switch ((int)p->Type)
-				{
-				case BRUTE_MATCH: printf("  Type: Bruteforce     \n");
-					break;
-				case DICTIONARY_MATCH: printf("  Type: Dictionary     \n");
-					break;
-				case DICT_LEET_MATCH: printf("  Type: Dict+Leet      \n");
-					break;
-				case USER_MATCH: printf("  Type: User Words     \n");
-					break;
-				case USER_LEET_MATCH: printf("  Type: User+Leet      \n");
-					break;
-				case REPEATS_MATCH: printf("  Type: Repeated       \n");
-					break;
-				case SEQUENCE_MATCH: printf("  Type: Sequence       \n");
-					break;
-				case SPATIAL_MATCH: printf("  Type: Spatial        \n");
-					break;
-				case DATE_MATCH: printf("  Type: Date           \n");
-					break;
-				case YEAR_MATCH: printf("  Type: Year           \n");
-					break;
-				case LONG_PWD_MATCH: printf("  Type: Extra-long     \n");
-					break;
-				case BRUTE_MATCH + MULTIPLE_MATCH: printf("  Type: Bruteforce(Rep)\n");
-					break;
-				case DICTIONARY_MATCH + MULTIPLE_MATCH: printf("  Type: Dictionary(Rep)\n");
-					break;
-				case DICT_LEET_MATCH + MULTIPLE_MATCH: printf("  Type: Dict+Leet(Rep) \n");
-					break;
-				case USER_MATCH + MULTIPLE_MATCH: printf("  Type: User Words(Rep)\n");
-					break;
-				case USER_LEET_MATCH + MULTIPLE_MATCH: printf("  Type: User+Leet(Rep) \n");
-					break;
-				case REPEATS_MATCH + MULTIPLE_MATCH: printf("  Type: Repeated(Rep)  \n");
-					break;
-				case SEQUENCE_MATCH + MULTIPLE_MATCH: printf("  Type: Sequence(Rep)  \n");
-					break;
-				case SPATIAL_MATCH + MULTIPLE_MATCH: printf("  Type: Spatial(Rep)   \n");
-					break;
-				case DATE_MATCH + MULTIPLE_MATCH: printf("  Type: Date(Rep)      \n");
-					break;
-				case YEAR_MATCH + MULTIPLE_MATCH: printf("  Type: Year(Rep)      \n");
-					break;
-				case LONG_PWD_MATCH + MULTIPLE_MATCH: printf("  Type: Extra-long(Rep)\n");
-					break;
 
-				default: printf("  Type: Unknown%d ", p->Type);
-					break;
-				}
+	delete[] Password;
+	delete[] Fullname;
+	delete[] AccountName;
 
-				CheckLen += p->Length;
-				// Carry out next check
-				p = p->Next;
-			}
-			printf("Entropy > %f\n", m);
-			ZxcvbnFreeInfo(Info);
-
-			return FALSE;
-		};
-
-		Status = CarryCheck();
-
-		// Cleanup
-
-		ZxcvbnUnInit();
-	}
 
 	return Status;
 }
 
 
 // Just needed to load the CRT Libs
-void main()
+int main()
 {
+	return 1;
 };

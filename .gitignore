@@ -5,3 +5,4 @@
 /bin/*.dll
 /.idea
 /Loader/cmake-build-debug/
+/PassFiltLib/cmake-build-release-mingw/

@@ -1,0 +1,3 @@
+[submodule "PassFiltLib/Extern/zxcvbn-cpp"]
+	path = PassFiltLib/Extern/zxcvbn-cpp
+	url = https://thelig.ht/code/zxcvbn-cpp
