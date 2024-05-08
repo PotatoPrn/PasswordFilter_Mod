@@ -46,7 +46,7 @@ int main(int argc, char* argv[])
 	GetComputerName(ComputerName, ComputerNameLen);
 
 	_FilterPassword FilterPassword =
-			reinterpret_cast<_FilterPassword>(GetProcAddress(LoadLibrary("PassfiltLib.dll"), "PasswordFilter"));
+			reinterpret_cast<_FilterPassword>(GetProcAddress(LoadLibrary("PassFiltLib.dll"), "PasswordFilter"));
 
 
 	PUNICODE_STRING AccountName, Fullname, Password;
