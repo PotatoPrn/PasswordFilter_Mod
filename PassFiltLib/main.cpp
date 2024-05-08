@@ -37,9 +37,7 @@ BOOLEAN PasswordFilter(PUNICODE_STRING PuniAccountName, PUNICODE_STRING PuniFull
 	// MMMM outdated non documented libraries make me want to kill my self : ^)
 	int bruh = 0;
 	const char* UserInput[] = {Fullname, AccountName, 0};
-	zxcvbn_guesses_t yep = 0.0;
-	bruh = zxcvbn_password_strength(Password, UserInput, &yep, 0);
-	printf("%d\n", bruh);
+
 
 
 	// Perform Check

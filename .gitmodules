@@ -1,0 +1,3 @@
+[submodule "PassFiltLib/Extern/zxcppvbn"]
+	path = PassFiltLib/Extern/zxcppvbn
+	url = https://github.com/tresorit/zxcppvbn.git
