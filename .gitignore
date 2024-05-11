@@ -1,8 +1,12 @@
 /PassFiltLib/cmake-build-debug/
 /PassFiltLib/cmake-build-release/
 /Loader/cmake-build-release/
-/bin/*.exe
-/bin/*.dll
 /.idea
 /Loader/cmake-build-debug/
 /PassFiltLib/cmake-build-release-mingw/
+/bin/PassFiltLib.exp
+/bin/PassFiltLib.lib
+/PassFiltLib/Extern/zxcppvbn/.vs/zxcppvbn/FileContentIndex/5bb8ac06-4331-498c-b2a2-efefb7adae56.vsidx
+/PassFiltLib/Extern/zxcppvbn/.vs/zxcppvbn/v17/Browse.VC.db
+/PassFiltLib/Extern/zxcppvbn/.vs/zxcppvbn/v17/DocumentLayout.json
+/PassFiltLib/Extern/zxcppvbn/.vs/zxcppvbn/v17/Solution.VC.db
